@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        #regForm {
+            background-color: #ffffff;
+            margin: 50px auto;
+            padding: 40px;
+            width: 60%;
+            min-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 12px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input.invalid {
+            background-color: #f1e6e6;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #951406;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<form id="regForm">
+    <div class="box">
+        <p>01 Personal Details  
+            <br><br>
+            Tell us a bit about yourself.
+        </p>
+        <hr class="hr">
+        <p>Please provide your full legal name</p>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fname">FIRST NAME*</label>  
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="First name">
+                <span id="fname-error" class="error-message"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="lname">LAST NAME*</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Last name">
+                <span id="lname-error" class="error-message"></span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="dob">DATE OF BIRTH (DD/MM/YYYY)*</label>
+                <input type="date" id="dob" name="dob">
+                <span id="result" class="error-message"></span>
+            </div>
+        </div>
+        <br>
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" onclick="nextPage()">Next</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+function validateDob() {
+    const dobInput = document.getElementById('dob').value;
+    const result = document.getElementById('result');
+    let isValid = true;
+
+    if (!dobInput) {
+        result.textContent = "Please enter your date of birth.";
+        result.style.color = "red";
+        isValid = false;
+    }
+
+    const dateOfBirth = new Date(dobInput);
+    const today = new Date();
+    const age = today.getFullYear() - dateOfBirth.getFullYear();
+    const monthDiff = today.getMonth() - dateOfBirth.getMonth();
+    const dayDiff = today.getDate() - dateOfBirth.getDate();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+
+    if (age >= 18) {
+        isValid = true;
+        result.textContent = "";
+    } else {
+        result.textContent = "The person is not above 18 years old.";
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function validateName() {
+    const fname = document.getElementById("fname").value;
+    const lname = document.getElementById("lname").value;
+    const fnameError = document.getElementById("fname-error");
+    const lnameError = document.getElementById("lname-error");
+    
+    fnameError.textContent = "";
+    lnameError.textContent = "";
+    
+    let isValid = true;
+
+    if (fname === "" || /\d/.test(fname)) {
+        fnameError.textContent = "Please enter your first name properly.";
+        isValid = false;
+    }
+    if (lname === "" || /\d/.test(lname)) {
+        lnameError.textContent = "Please enter your last name properly.";
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function nextPage() {
+    if (validateName() && validateDob()) {
+        const fname = document.getElementById('fname').value;
+        const lname = document.getElementById('lname').value;
+        const dob = document.getElementById('dob').value;
+        window.location.href = `index.html?fname=${encodeURIComponent(fname)}&lname=${encodeURIComponent(lname)}&dob=${encodeURIComponent(dob)}`;
+    }
+}
+</script>
+
+</body>
+</html>

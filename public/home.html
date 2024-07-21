@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* General styles */
+        
+        .viewed {
+            background-color: green !important;
+        }
+    
+        .image-top {
+            width: 23px;
+            position: relative;
+            top: -32px;
+            left: -9px;
+        }
+    
+        /* Responsive styles */
+        /* Mobile devices (max-width: 768px) */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 20px;
+                height: auto;
+                align-items: flex-start;
+            }
+    
+            .nav {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 10px;
+            }
+    
+            .nav.active {
+                display: flex;
+            }
+    
+            .nav li {
+                margin-bottom: 10px;
+            }
+    
+            .hero-content {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+    
+            .account-summary {
+                flex-direction: column;
+                padding: 20px;
+            }
+    
+            .account-summary div {
+                margin-bottom: 20px;
+            }
+    
+            .important-documents {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+    
+            .important-documents div {
+                margin-bottom: 20px;
+            }
+    
+            section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+    
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+                position: absolute;
+                top: 24px;
+                right: 10px;
+            }
+        }
+    
+        /* Tablet devices (min-width: 769px) and (max-width: 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .header {
+                flex-direction: row;
+                padding: 30px;
+                align-items: center;
+            }
+    
+            .nav {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+    
+            .nav li {
+                margin-right: 20px;
+            }
+    
+            .hero-content {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+    
+            .account-summary {
+                flex-direction: row;
+                padding: 30px;
+            }
+    
+            .account-summary div {
+                margin-right: 20px;
+            }
+    
+            .important-documents {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 30px;
+            }
+    
+            section {
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+    
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    
+        /* Desktop devices (min-width: 1025px) */
+        @media (min-width: 1025px) {
+            .header {
+                flex-direction: row;
+                padding: 40px;
+                align-items: center;
+            }
+    
+            .nav {
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+    
+            .nav li {
+                margin-left: 20px;
+            }
+    
+            .hero-content {
+                padding: 60px;
+                margin-bottom: 40px;
+            }
+    
+            .account-summary {
+                flex-direction: row;
+                padding: 40px;
+            }
+    
+            .account-summary div {
+                margin-right: 40px;
+            }
+    
+            .important-documents {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 40px;
+            }
+    
+            section {
+                padding: 40px;
+                margin-bottom: 40px;
+            }
+    
+            .menu-icon {
+                display: none;
+            }
+        }
+    
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #ffffff;
+            min-width: 200px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+    
+        .dropdown-menu.active {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .nav li {
+            position: relative;
+        }
+    
+        .nav a {
+            display: block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+        }
+    
+        .nav a:hover {
+            background-color: #2b6cb0;
+        }
+    
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #2d3748;
+        }
+    
+        .dropdown-menu a:hover {
+            background-color: #edf2f7;
+        }
+    
+        /* Footer */
+        footer {
+            background-color: #2b6cb0;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-900 text-white">
+        <div class="container mx-auto p-5 flex justify-between items-center header">
+            <div class="name text-2xl sm:text-3xl font-bold">
+                MyBank
+            </div>
+            <div class="menu-icon" id="menu-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </div>
+            <nav class="nav" id="mobile-menu">
+                <ul class="flex flex-col sm:flex-row space-x-6 text-xl sm:text-2xl">
+                    <li class="relative">
+                        <a href="#" class="hover:underline">Home</a>
+                    </li>
+                    <li><a href="#" class="hover:underline">Contacts</a></li>
+                    <li><a href="#" class="hover:underline">Services</a></li>
+                    <li><a href="#" class="hover:underline">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="relative h-screen flex flex-col items-center justify-center bg-cover bg-center p-5 text-center md:text-left"
+        style="background-image: url('https://example.com/your-image.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-white p-5 space-y-6 md:max-w-lg">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4">Easy Access Account</h1>
+            <p class="text-lg sm:text-2xl mb-8">
+                An Easy Access Account from ClearSavings Bank can help your money grow. These are limited
+                access products and can be withdrawn at any time.
+            </p>
+            <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg w-full sm:w-auto">
+                <div class="flex flex-col sm:flex-row items-center justify-around mb-4 space-y-4 sm:space-y-0 sm:space-x-10">
+                    <div class="text-center sm:text-left">
+                        <p class="text-2xl sm:text-4xl">Gross Interest</p>
+                        <p class="text-2xl sm:text-4xl">4.97%</p>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-2xl sm:text-4xl">AER Interest</p>
+                        <p class="text-2xl sm:text-4xl">5.08%</p>
+                    </div>
+                </div>
+                <button onclick="scrollToDocuments()"
+                    class="bg-pink-500 w-full sm:w-auto hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Apply now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-12">
+        <div class="container mx-auto text-center">
+            <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="text-left md:w-1/2">
+                        <h3 class="text-3xl font-bold mb-4">Account Summary</h3>
+                        <p class="text-lg">The summary box contains the specific terms and conditions for this account and where
+                            applicable, these supersede our General Savings Conditions.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
+                    <div class="bg-white p-6 rounded shadow">
+                        <p class="text-lg"><strong>1.</strong> You can deposit any amount between £1 and £200</p>
+                    </div>
+                    <div class="bg-white p-6 rounded shadow">
+                        <p class="text-lg"><strong>2.</strong> You can add to your savings at any time up to the £200
+                            maximum</p>
+                    </div>
+                    <div class="bg-white p-6 rounded shadow">
+                        <p class="text-lg"><strong>3.</strong> You can withdraw your money without giving us notice</p>
+                    </div>
+                    <div class="bg-white p-6 rounded shadow">
+                        <p class="text-lg"><strong>4.</strong> If your balance falls below £50 your interest rate will
+                            reduce to 0.10% AER</p>
+                    </div>
+                    <div class="bg-white p-6 rounded shadow">
+                        <p class="text-lg"><strong>5.</strong> All payments to and from your MyBank account must be from
+                            a personal current account held in your name with another UK bank/building society</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="important-documents" class="py-12 bg-white">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl sm:text-3xl font-bold mb-4">Important Documents to Review</h3>
+            <p class="mb-8">Please open and read all of the following important documents - you won't be able to apply
+                until you've done so. Please also save or print copies of these documents for future reference. If you
+                have any questions about the contents of these documents please contact us.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <a href="dummy_fscs.pdf" target="_blank"
+                    class="block bg-gray-100 p-4 rounded shadow hover:bg-gray-200 important-link">
+                    <p class="font-bold">FSCS Information</p>
+                    <p>Read and review</p>
+                </a>
+                <a href="dummy_terms.pdf" target="_blank"
+                    class="block bg-gray-100 p-4 rounded shadow hover:bg-gray-200 important-link">
+                    <p class="font-bold">Terms & Conditions</p>
+                    <p>Read and review</p>
+                </a>
+                <a href="dummy_features.pdf" target="_blank"
+                    class="block bg-gray-100 p-4 rounded shadow hover:bg-gray-200 important-link">
+                    <p class="font-bold">Key Features & Summary Box</p>
+                    <p>Read and review</p>
+                </a>
+                <a href="dummy_privacy.pdf" target="_blank"
+                    class="block bg-gray-100 p-4 rounded shadow hover:bg-gray-200 important-link">
+                    <p class="font-bold">Privacy Policy</p>
+                    <p>Read and review</p>
+                </a>
+            </div>
+            <button
+    class="bg-pink-500 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:pointer-events-none"
+    id="start-app-btn" disabled onclick="window.location.href='personal.html'">
+    Start Application
+</button>
+
+        </div>
+    </section>
+
+    <footer class="bg-blue-900 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 MyBank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll to Important Documents section
+        function scrollToDocuments() {
+            document.getElementById('important-documents').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // PDF link tracking
+        const importantLinks = document.querySelectorAll('.important-link');
+        const startAppBtn = document.getElementById('start-app-btn');
+        let reviewedLinks = 0;
+
+        importantLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.classList.contains('viewed')) {
+                    link.classList.add('viewed');
+                    reviewedLinks++;
+                    if (reviewedLinks === importantLinks.length) {
+                        startAppBtn.removeAttribute('disabled');
+                        startAppBtn.classList.remove('bg-pink-500');
+                        startAppBtn.classList.add('bg-green-500');
+                    }
+                }
+            });
+        });
+
+        // JavaScript for dropdown menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdownTriggers = document.querySelectorAll('.nav li.relative');
+
+            dropdownTriggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', function () {
+                    this.querySelector('.dropdown-menu').classList.remove('hidden');
+                });
+
+                trigger.addEventListener('mouseleave', function () {
+                    this.querySelector('.dropdown-menu').classList.add('hidden');
+                });
+            });
+        });
+
+        // Toggle mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+        var nav = document.getElementById('mobile-menu');
+        nav.classList.toggle('active');
+    });
+    </script>
+</body>
+
+</html>

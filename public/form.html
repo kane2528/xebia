@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            margin: 20px auto;
+            flex: 1;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: #ececec;
+        }
+
+        .tab.selected {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .continue {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .continue.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .continue:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            background-color: #007bff;
+            text-align: center;
+            padding: 10px 0;
+            color: #fff;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="#">Logo</a>
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+            <h2>07 Employment Details</h2>
+            <div class="tabs">
+                <div class="tab selected" onclick="selectOption(this, 'full-time')">Full-time employed</div>
+                <div class="tab" onclick="selectOption(this, 'part-time')">Part-time employed</div>
+                <div class="tab" onclick="selectOption(this, 'self-employed')">Self-employed</div>
+                <div class="tab" onclick="selectOption(this, 'student')">Student</div>
+                <div class="tab" onclick="selectOption(this, 'not-employed')">Not in employment</div>
+                <div class="tab" onclick="selectOption(this, 'retired')">Retired</div>
+            </div>
+
+            <div id="full-time">
+                <div class="form-group">
+                    <label for="industry-ft">What industry do you work in?</label>
+                    <select id="industry-ft" class="required">
+                        <option value="">Select your industry</option>
+                        <option value="tech">Technology</option>
+                        <option value="health">Healthcare</option>
+                        <option value="finance">Finance</option>
+                        <option value="education">Education</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation-ft">What's your occupation?</label>
+                    <select id="occupation-ft" class="required">
+                        <option value="">Select your occupation</option>
+                        <option value="developer">Developer</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="manager">Manager</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience-ft">How many years of experience do you have?</label>
+                    <input type="number" id="experience-ft" class="required" min="0">
+                </div>
+            </div>
+
+            <div id="part-time" class="hidden">
+                <div class="form-group">
+                    <label for="industry-pt">What industry do you work in?</label>
+                    <select id="industry-pt" class="required">
+                        <option value="">Select your industry</option>
+                        <option value="tech">Technology</option>
+                        <option value="health">Healthcare</option>
+                        <option value="finance">Finance</option>
+                        <option value="education">Education</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation-pt">What's your occupation?</label>
+                    <select id="occupation-pt" class="required">
+                        <option value="">Select your occupation</option>
+                        <option value="developer">Developer</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="manager">Manager</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hours-pt">How many hours per week do you work?</label>
+                    <input type="number" id="hours-pt" class="required" min="0">
+                </div>
+            </div>
+
+            <div id="self-employed" class="hidden">
+                <div class="form-group">
+                    <label for="industry-se">What industry do you work in?</label>
+                    <select id="industry-se" class="required">
+                        <option value="">Select your industry</option>
+                        <option value="tech">Technology</option>
+                        <option value="health">Healthcare</option>
+                        <option value="finance">Finance</option>
+                        <option value="education">Education</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation-se">What's your occupation?</label>
+                    <select id="occupation-se" class="required">
+                        <option value="">Select your occupation</option>
+                        <option value="developer">Developer</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="manager">Manager</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience-se">How many years have you been self-employed?</label>
+                    <input type="number" id="experience-se" class="required" min="0">
+                </div>
+            </div>
+
+            <div id="student" class="hidden">
+                <div class="form-group">
+                    <label for="study-field">What field are you studying?</label>
+                    <input type="text" id="study-field" class="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="graduation-year">What year are you expected to graduate?</label>
+                    <input type="number" id="graduation-year" class="required" min="2024">
+                </div>
+
+                <div class="form-group">
+                    <label for="student-status">Are you a full-time or part-time student?</label>
+                    <select id="student-status" class="required">
+                        <option value="">Select your status</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="not-employed" class="hidden">
+                <div class="form-group">
+                    <label for="reason-ne">What's the reason for not being employed?</label>
+                    <input type="text" id="reason-ne" class="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="looking-ne">Are you looking for a job?</label>
+                    <select id="looking-ne" class="required">
+                        <option value="">Select an option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unemployment-duration">How long have you been unemployed?</label>
+                    <input type="number" id="unemployment-duration" class="required" min="0">
+                </div>
+            </div>
+
+            <div id="retired" class="hidden">
+                <div class="form-group">
+                    <label for="retirement-age">At what age did you retire?</label>
+                    <input type="number" id="retirement-age" class="required" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="years-retired">How many years have you been retired?</label>
+                    <input type="number" id="years-retired" class="required" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirement-income">What's your annual retirement income?</label>
+                    <select id="retirement-income" class="required">
+                        <option value="">Select your income range</option>
+                        <option value="0-24999">£0-£24,999</option>
+                        <option value="25000-49999">£25,000-£49,999</option>
+                        <option value="50000-99999">£50,000-£99,999</option>
+                        <option value="100000-149999">£100,000-£149,999</option>
+                        <option value="150000+">£150,000+</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="button" class="continue" id="continue-btn" onclick="redirect()">Continue</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Your Company. All rights reserved.
+        <div class="menu">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+
+    <script>
+        function selectOption(element, sectionId) {
+            // Remove 'selected' class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked tab
+            element.classList.add('selected');
+
+            // Hide all sections
+            const sections = document.querySelectorAll('.container > form > div:not(.hidden)');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            // Show the selected section
+            if (sectionId) {
+                document.getElementById(sectionId).classList.remove('hidden');
+            }
+
+            // Check completion of the current section
+            checkCompletion();
+        }
+
+        function checkCompletion() {
+            // Get the current section ID
+            const selectedTab = document.querySelector('.tab.selected');
+            const sectionId = selectedTab ? selectedTab.textContent.toLowerCase().replace(' ', '-') : '';
+
+            // If sectionId is empty, do nothing
+            if (!sectionId) return;
+
+            // Get the required fields in the current section
+            const requiredFields = document.querySelectorAll(`#${sectionId} .required`);
+
+            let allFilled = true;
+            requiredFields.forEach(field => {
+                if (field.type === 'select-one') {
+                    if (field.value === '') {
+                        allFilled = false;
+                    }
+                } else if (field.type === 'number' || field.type === 'text') {
+                    if (field.value.trim() === '') {
+                        allFilled = false;
+                    }
+                }
+            });
+
+            // Enable or disable the continue button based on completion
+            const continueBtn = document.getElementById('continue-btn');
+            if (allFilled) {
+                continueBtn.classList.add('active');
+            } else {
+                continueBtn.classList.remove('active');
+            }
+        }
+
+        function redirect() {
+            const continueBtn = document.getElementById('continue-btn');
+            if (continueBtn.classList.contains('active')) {
+                window.location.href = './nationality/index.html';
+            }
+        }
+
+        // Add event listeners to check completion when fields change
+        document.querySelectorAll('.required').forEach(field => {
+            field.addEventListener('input', checkCompletion);
+            field.addEventListener('change', checkCompletion);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="flex">
+        <div id="heading">
+            <h2>Your savings journey starts here</h2>
+            <p>We just need a few more details</p>
+            <hr>
+        </div>
+        <div class="container" id="emailSection">
+            <h3 class="section-title"><span class="section-number">03</span>Email Address</h3>
+            <hr>
+            <form id="emailRegistrationForm">
+                <label for="email">EMAIL ADDRESS*</label>
+                <div class="form-with-button">
+                    <input type="email" id="email" name="email" class="input-field" placeholder="Email address"
+                        required>
+                    <button type="submit" id="sendCode1" class="btn">Send verification code</button>
+                    <p id="emailMessage"></p>
+                </div>
+            </form>
+            <button id="skipEmail" class="btn-secondary">Skip</button>
+        </div>
+
+        <div class="container-otp" id="emailVerificationSection" style="display: none;">
+            <h2>Email Verification</h2>
+            <hr>
+            <p class="otp-text">A verification code has been sent to your email. Please enter it below:</p>
+            <div id="emailOtpInputs" class="otp-container">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp1">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp2">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp3">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp4">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp5">
+                <input type="text" maxlength="1" class="otp-input" id="emailOtp6">
+            </div>
+            <button id="verifyEmail" class="btn">Verify Email</button>
+            <div id="countdownDisplay"></div>
+            <span id="emailMessage"></span>
+            <button id="resendEmailOtp" class="btn-otp-secondary">Resend OTP</button>
+            <button id="skipEmailVerification" class="btn-secondary">Skip</button>
+        </div>
+
+        <div class="container" id="phoneSection" style="display: none;">
+            <h3 class="section-title"><span class="section-number">04</span>Mobile Number</h3>
+            <hr>
+            <form id="phoneRegistrationForm">
+                <label for="phone">MOBILE NUMBER*</label>
+                <div class="form-with-button">
+                    <div class="phone-input-container">
+                        <input type="text" id="countryCode" name="countryCode" value="+91" readonly>
+                        <input type="tel" id="phone" name="phone" class="input-field" placeholder="Mobile Number"
+                            maxlength="10" required>
+                    </div>
+                    <button type="submit" id="sendCode2" class="btn">Send verification code</button>
+                </div>
+            </form>
+            <button id="skipPhone" class="btn-secondary">Skip</button>
+            <span id="phoneVerified" class="verified-message" style="display: none;">✔ Verified</span>
+        </div>
+
+        <div class="container-otp" id="phoneVerificationSection" style="display: none;">
+            <h2>Mobile Number Verification</h2>
+            <hr>
+            <p class="otp-text">A verification code has been sent to your mobile number. Please enter it below:</p>
+            <div id="phoneOtpInputs" class="otp-container">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp1">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp2">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp3">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp4">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp5">
+                <input type="text" maxlength="1" class="otp-input" id="phoneOtp6">
+            </div>
+            <button id="verifyPhone" class="btn">Verify Mobile Number</button>
+            <div id="countdownDisplay"></div>
+            <span id="phoneMessage"></span>
+            <button id="resendPhoneOtp" class="btn-otp-secondary">Resend OTP</button>
+            <button id="skipPhoneVerification" class="btn-secondary">Skip</button>
+        </div>
+
+        <div class="container-login-details" id="loginDetailsSection" style="display: none;">
+            <form id="loginDetailsForm">
+                <h2>Create your login details</h2>
+                <p>Keep your details safe - you'll need them later</p>
+                <hr>
+                <p>Please create a username and password to log into your account</p>
+                <div class="userdetails">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <small>Must not contain any special characters or spaces.</small>
+                    <small>Must be at least 8 characters long, but no longer than 20.</small>
+                </div>
+                <div class="userdetails">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" id="togglePassword">Show</button>
+                    <small>Must be at least 8 characters long.</small>
+                    <small>Contain at least 1 number and 1 UPPER case letter.</small>
+                    <small>Not contain sequences or repeated characters such as 1234, 3333, ZZZZ, etc.</small>
+                </div>
+                <div class="userdetails">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <small id="password-match-message"></small>
+                </div>
+            </form>
+            <button id="continueToLogin" class="btn-secondary">Continue</button>
+            <button id="skipLogin" class="btn-secondary">Skip</button>
+        </div>
+
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

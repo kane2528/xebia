@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <form id="countryForm">
+            <div class="form-group">
+                <label for="nationality">What is your nationality/citizenship?</label>
+                <div id="nationalityOptions" class="options">
+                    <div class="option">
+                        <input type="radio" id="uk1" name="nationality" value="United Kingdom">
+                        <label for="uk1"><img src="https://flagcdn.com/16x12/gb.png" alt="UK Flag"> United Kingdom</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="us1" name="nationality" value="United States">
+                        <label for="us1"><img src="https://flagcdn.com/16x12/us.png" alt="US Flag"> United States</label>
+                    </div>
+                </div>
+                <input type="text" id="nationalityInput" placeholder="Add another country">
+                <button type="button" onclick="addCountry('nationality')">Add</button>
+            </div>
+
+            <div class="form-group">
+                <label for="taxation">What is your taxation country?</label>
+                <div id="taxationOptions" class="options">
+                    <div class="option">
+                        <input type="radio" id="uk2" name="taxation" value="United Kingdom">
+                        <label for="uk2"><img src="https://flagcdn.com/16x12/gb.png" alt="UK Flag"> United Kingdom</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="us2" name="taxation" value="United States">
+                        <label for="us2"><img src="https://flagcdn.com/16x12/us.png" alt="US Flag"> United States</label>
+                    </div>
+                </div>
+                <input type="text" id="taxationInput" placeholder="Add another country">
+                <button type="button" onclick="addCountry('taxation')">Add</button>
+            </div>
+
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
